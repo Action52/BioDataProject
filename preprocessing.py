@@ -213,7 +213,8 @@ def preprocess_id(config, chroma_client: chromadb.ClientAPI, prot_id, neighbors,
                          how='left').drop_duplicates()
 
     merged_df = resize_dataframe(merged_df, target_row_count=out_rows)
-    merged_df = merged_df.reset_index()
+    merged_df = merged_df.reset_index(drop=True)
+    merged_df['original_id'] = prot_id
     # print(merged_df)
     return merged_df
 
