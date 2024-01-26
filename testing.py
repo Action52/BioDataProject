@@ -42,7 +42,7 @@ def preprocess_test_id(config, chroma_client: chromadb.ClientAPI, prot_id,
     merged_df = pd.merge(merged_df, infoprot_reduced, on='protein_id',
                          how='left').drop_duplicates()
 
-    print(merged_df)
+    #print(merged_df)
 
     merged_df = resize_dataframe(merged_df, target_row_count=out_rows)
     merged_df = merged_df.reset_index(drop=True)
@@ -134,6 +134,6 @@ def preprocess_test_generator(aspect="cellular_component"):
 
 if __name__ == "__main__":
     for i, batch in enumerate(preprocess_test_generator()):
-        # print(batch)
+        print(batch)
         if i == 5:
             break
