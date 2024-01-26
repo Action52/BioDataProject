@@ -1,23 +1,15 @@
-files:
-  sequences_file: '../biological_data_pfp/train/train.fasta'
-  embeddings_file: '../biological_data_pfp/train/train_embeddings.h5'
-  train_file: '../biological_data_pfp/train/train_set.tsv'
-  infoprot_file: '../biological_data_pfp/train/train_protein2ipr.dat'
-  train_ids_file: '../biological_data_pfp/train/train_ids.txt'
-
 test_files:
-  sequences_file: '../biological_data_pfp/test/test.fasta'
-  embeddings_file: '../biological_data_pfp/test/test_embeddings.h5'
-  infoprot_file: '../biological_data_pfp/test/test_protein2ipr.dat'
-  test_ids_file: '../biological_data_pfp/test/test_ids.txt'
+  embeddings_file: './dataset/test/test_embeddings.h5'
+  test_ids_file: './dataset/test/test_ids.txt'
 
-collection_name: 'sequence_embeddings'
-neighbors: 5
+models:
+  celullar_component_model: './model/cc_model.h5'
+  biological_process_model: './model/bp_model.h5'
+  molecular_function_model: './model/mf_model.h5'
 
-ingestion:
-  execute: false
-  batch_size: 100
-preprocessing:
-  execute: true
-  batch_size: 10
-  out_rows: 150
+frequency_table:
+  cc_frequency_table: './dataset/train/cellular_component_freq.csv'
+  mf_frequency_table: './dataset/train/molecular_function_freq.csv'
+  bp_frequency_table: './dataset/train/biological_process_freq.csv'
+
+output_file: './outputs/prediction.tsv'
