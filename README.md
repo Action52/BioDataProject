@@ -15,7 +15,9 @@ pip install -r requirements.txt
 
 ## Train
 * * *
-To re-train, execute the simple_ff-preprocess.ipynb notebook, taking into consideration the paths of the files to use.
+To re-train, execute 
+- the parse_ontology.ipynb notebook
+- the simple_ff-preprocess.ipynb notebook, taking into consideration the paths of the files to use.
 
 
 ## Test

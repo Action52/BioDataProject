@@ -1,6 +1,6 @@
 test_files:
-  embeddings_file: './dataset/test/test_embeddings.h5'
-  test_ids_file: './dataset/test/test_ids.txt'
+  embeddings_file: '../biological_data_pfp/test/test_embeddings.h5'
+  test_ids_file: '../biological_data_pfp/test/test_ids.txt'
 
 models:
   celullar_component_model: './model/cc_model.h5'
@@ -13,3 +13,7 @@ frequency_table:
   bp_frequency_table: './dataset/train/biological_process_freq.csv'
 
 output_file: './outputs/prediction.tsv'
+
+ontology:
+  train_dataset_path: '../biological_data_pfp/train/train_set.tsv'
+  gene_ontology_path: '../biological_data_pfp/train/go-basic.obo'
