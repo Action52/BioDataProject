@@ -172,6 +172,7 @@ def batch_ids(ids, batch_size):
 def create_embeddings_db(config, prot_ids, sequences, go_terms, infoprot):
     batch_size = config['ingestion']['batch_size']
     batches = len(prot_ids)/batch_size
+    embeddings_file = config['files']['embeddings_file']
     print("Estimated batches", batches)
     for ids in tqdm(batch_ids(prot_ids, batch_size)):
         load_data_into_chroma(embeddings_file, sequences, go_terms, infoprot,
