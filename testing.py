@@ -50,6 +50,7 @@ def preprocess_test_id(config, chroma_client: chromadb.ClientAPI, prot_id,
 
     if not include_neighbors:
         merged_df = merged_df[merged_df['protein_id'] == prot_id]
+        merged_df = resize_dataframe(merged_df, target_row_count=out_rows)
     return merged_df
 
 
