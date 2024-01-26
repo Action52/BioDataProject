@@ -7,26 +7,28 @@ course from UniPd, under supervision of Prof. Damiano Piovesan.
 * * *
 You will need to install the required Python packages in a clean environment.
 
-```python
+```bash
 conda create --name biodata python=3.11 --no-default-packages
 conda activate biodata
 pip install -r requirements.txt
 ```
 
-Also, our solution requires the protein embeddings to be stored inside a ChromaDB
-database. In case you don't have the chromadb backup and wish to reingest, you can do so by setting, in the config.yaml file:
-```yaml
-ingestion:
-  execute: true
-```
-When running, the script will detect that you wish to ingest again the embeddings
-and proceed to do it.
-
 ## Train
 * * *
+To re-train, execute the simple_ff-preprocess.ipynb notebook, taking into consideration the paths of the files to use.
+
 
 ## Test
 * * *
+To run the testing pipeline, you can execute the main.py script.
+```python
+python main.py --config config.yaml
+```
+
+where config.yaml will contain the paths to the corresponding files to run inference on the models.  
+
+The output will consist on a file with probabilities that can be fed to the CAFA evaluator. 
+By default, you can find the output in <code>outputs/prediction.tsv</code>.
 
 ## Extra Information
 * * *
