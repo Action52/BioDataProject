@@ -5,7 +5,7 @@ from preprocessing import *
 
 def preprocess_test_id(config, chroma_client: chromadb.ClientAPI, prot_id,
                        neighbors, train_go_terms, test_infoprot,
-                       prot_id_embeddings, out_rows=150):
+                       prot_id_embeddings, out_rows=150, include_neighbors=False):
     # Find related embeddings
     collection = chroma_client.get_collection(config['collection_name'])
 
@@ -42,11 +42,14 @@ def preprocess_test_id(config, chroma_client: chromadb.ClientAPI, prot_id,
     merged_df = pd.merge(merged_df, infoprot_reduced, on='protein_id',
                          how='left').drop_duplicates()
 
+    print(merged_df)
+
     merged_df = resize_dataframe(merged_df, target_row_count=out_rows)
     merged_df = merged_df.reset_index(drop=True)
     merged_df['original_id'] = prot_id
 
-    print(merged_df)
+    if not include_neighbors:
+        merged_df = merged_df[merged_df['protein_id'] == prot_id]
     return merged_df
 
 
