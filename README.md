@@ -14,8 +14,7 @@ pip install -r requirements.txt
 ```
 
 Also, our solution requires the protein embeddings to be stored inside a ChromaDB
-database. You need to do this the first time you run the code. For this, set the ingestion
-configuration to true in the config file.
+database. In case you don't have the chromadb backup and wish to reingest, you can do so by setting, in the config.yaml file:
 ```yaml
 ingestion:
   execute: true

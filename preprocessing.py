@@ -275,7 +275,7 @@ def preprocess_batch(config, chroma_client, prot_ids, neighbors, go_terms, infop
     return dataframes
 
 
-def preprocess_generator():
+def preprocess_generator(aspect='cellular_component'):
     config_path = "config.yaml"
     config = load_config(config_path)
 
@@ -286,7 +286,7 @@ def preprocess_generator():
     train_ids_file = config['files']['train_ids_file']
 
     sequences = parse_fasta(sequences_file)
-    go_terms = parse_go_terms(train_file, aspect='cellular_component')
+    go_terms = parse_go_terms(train_file, aspect=aspect)
     infoprot = parse_infoprot(infoprot_file)
 
     prot_ids = load_train_ids(train_ids_file)

@@ -16,12 +16,17 @@ def preprocess_test_id(config, chroma_client: chromadb.ClientAPI, prot_id,
     )
     embeddings = results['embeddings'][0]
     embeddings = pd.DataFrame(embeddings)
+    embeddings = embeddings._append([prot_id_embeddings], ignore_index=True)
     embeddings = embeddings.rename(
         columns={i: f'embd_dim{i}' for i in embeddings.columns})
+
+    original_row = {'protein_id': prot_id, 'distance': 0.0}
 
     results = {'protein_id': results['ids'][0],
                'distance': results['distances'][0]}
     results_df = pd.DataFrame().from_dict(results)
+    results_df = results_df._append(original_row, ignore_index=True)
+
     results_df = pd.concat([results_df, embeddings], axis=1)
 
     go_terms_reduced = \
@@ -40,7 +45,8 @@ def preprocess_test_id(config, chroma_client: chromadb.ClientAPI, prot_id,
     merged_df = resize_dataframe(merged_df, target_row_count=out_rows)
     merged_df = merged_df.reset_index(drop=True)
     merged_df['original_id'] = prot_id
-    # print(merged_df)
+
+    print(merged_df)
     return merged_df
 
 
@@ -87,7 +93,7 @@ def get_prot_id_embeddings(embeddings_file_path, prot_ids):
         return embeddings
 
 
-def preprocess_test_generator():
+def preprocess_test_generator(aspect="cellular_component"):
     config = load_config("config.yaml")
 
     sequences_file = config['test_files']['sequences_file']
@@ -99,7 +105,7 @@ def preprocess_test_generator():
 
     # sequences = parse_fasta(sequences_file)
     infoprot = parse_infoprot(infoprot_file)
-    train_go_terms = parse_go_terms(train_go_terms_file, aspect="cellular_component")
+    train_go_terms = parse_go_terms(train_go_terms_file, aspect=aspect)
 
     prot_ids = load_train_ids(test_ids_file)
 
@@ -125,6 +131,6 @@ def preprocess_test_generator():
 
 if __name__ == "__main__":
     for i, batch in enumerate(preprocess_test_generator()):
-        print(batch)
+        # print(batch)
         if i == 5:
             break
